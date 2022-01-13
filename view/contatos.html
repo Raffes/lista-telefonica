@@ -1,0 +1,58 @@
+<div class="container">
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center" ng-bind="title"></h2>
+            </div>
+
+            <div class="col-12 col-md-6 w-100">
+                <div class="input-group my-2">
+                    <input type="text" class="form-control" placeholder="Filtro" ng-model="busca">
+                </div>
+
+            </div>
+
+            <div class="col-12 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-danger m-2" ng-click="apagarContatos(contatos)"
+                    ng-disabled="!isContatoSelecionado(contatos)">
+                    Excluir contato
+                </button>
+                
+                <a href="#!/novoContato" type="button" class="btn btn-success m-2" >
+                    Adicionar contato
+                </a>
+
+            </div>
+
+            <div class="col">
+                <table class="table table-hover" ng-show="contatos.length > 0">
+                    <tr>
+
+                        <th></th>
+                        <th>Serial</th>
+                        <th><a href="" class="link" ng-click="ordenarPor('nome')">Nome</a></th>
+                        <th><a href="" class="link" ng-click="ordenarPor('telefone')">Telefone</a></th>
+                        <th><a href="" class="link" ng-click="ordenarPor('operadora')">Operadora</a></th>
+
+                    </tr>
+                    <tr ng-class="{'bg-warning': contato.selecionado}"
+                        ng-repeat="contato in contatos | filter: busca | orderBy: ordenacao:direcaoOrdenacao ">
+                        <td ng-style="{'border-left-color': contato.cor, 'border-left-width': '5px'}">
+                            <input type="checkbox" ng-model="contato.selecionado">
+                        </td>
+                        <td>{{ contato.serial | ellipsis: 10 }}</td>
+                        <td><a href="#!/detalhesContato/{{contato.serial}}"> {{ contato.nome | name | ellipsis: 10 }}</a></td>
+                        <td>{{ contato.telefone }}</td>
+                        <td>{{ contato.operadora }}</td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

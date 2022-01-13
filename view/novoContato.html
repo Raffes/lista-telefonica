@@ -1,0 +1,40 @@
+
+<div class="container">
+    <h3 class="modal-title mb-4 text-center mt-5">Adicionar contato</h3>
+    <form name="contatoForm">
+        <div class="mb-3">
+            <label for="inputName" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputName" name="nome" ng-model="contato.nome"
+                ng-required="true" ng-minlength="5">
+        </div>
+        <div class="mb-3">
+            <label for="inputPhone" class="form-label">Telefone</label>
+            <input type="number" class="form-control" id="inputPhone" name="telefone" ng-model="contato.telefone"
+                ng-required="true">
+            <!--ng-pattern="/^\d{4,5}-\d{4}$/"-->
+        </div>
+        <div class="mb-3">
+            <label for="inputDate" class="form-label">Data</label>
+            <input type="text" class="form-control" id="inputDate" name="data" ng-model="contato.data"
+                ng-required="true" ui-date>
+            <!--ng-pattern="/^\d{4,5}-\d{4}$/"-->
+        </div>
+        <div class="mb-3">
+            <label for="selectOp" class="form-label">Operadora</label>
+            <select class="form-control" id="selectOp" name="operadora" ng-model="contato.operadora"
+                ng-options="operadora.nome + ' ( ' + (operadora.preco | currency) + ' )' for operadora in operadoras | orderBy: 'nome' "
+                ng-required="true">
+                <option value="">Selecione uma operadora</option>
+            </select>
+        </div>
+
+        <div ng-include="'view/alertMessages.html'"></div>
+
+        <button type="submit" class="btn w-100 btn-success" ng-click="addContato(contato)"
+            ng-disabled="contatoForm.$invalid" data-bs-dismiss="modal">Salvar</button>
+
+            <button type="button" class="btn w-100 btn-info mt-2 text-light" ng-click="voltarListaContatos()">Voltar</button>
+
+    </form>
+
+</div>
